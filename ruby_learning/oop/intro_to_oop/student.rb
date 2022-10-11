@@ -1,3 +1,5 @@
+require_relative 'authenticator'
+
 class Student
   attr_accessor :first_name, :last_name, :email, :username, :password
 
@@ -6,7 +8,7 @@ class Student
     @last_name = last_name
     @username = username
     @email = email
-    @password = password
+    @password = Authenticator.create_hash_digest(password)
   end
 
   def to_s
@@ -14,8 +16,14 @@ class Student
   end
 end
 
-trevor = Student.new("Trevor", "Matheson", "trevor123", "trevor.earl.matheson@gmail.com", "password1")
-john = Student.new("John", "Doe", "john123", "john.doe@gmail.com", "password2")
+users = []
 
-puts trevor
-puts john
+users.append(Student.new("Trevor", "Matheson", "trevor123", "trevor.earl.matheson@gmail.com", "password1"))
+users.append(Student.new("John", "Doe", "john123", "john.doe@gmail.com", "password2"))
+
+puts "Username:"
+username = gets.chomp
+puts "Password:"
+password = gets.chomp
+
+puts Authenticator.authenticate_user(username, password, users)
