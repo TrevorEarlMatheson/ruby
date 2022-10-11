@@ -26,4 +26,4 @@ username = gets.chomp
 puts "Password:"
 password = gets.chomp
 
-puts Authenticator.authenticate_user(username, password, users)
+puts Authenticator.authenticate_user(username, password, [{ username: users[0].username, password: users[0].password }])

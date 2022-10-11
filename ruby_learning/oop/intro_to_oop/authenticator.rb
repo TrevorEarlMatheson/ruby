@@ -18,7 +18,7 @@ module Authenticator
 
   def self.authenticate_user(username, password, list_of_users)
     list_of_users.each do |user_record|
-      if user_record.username == username && verify_hash_digest(user_record.password) == password
+      if user_record[:username] == username && verify_hash_digest(user_record[:password]) == password
         return "Successful login!"
       end
     end
